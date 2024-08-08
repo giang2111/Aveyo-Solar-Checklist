@@ -147,14 +147,7 @@
     <div class="preferences">
         <ul>
             <li>Review SS while doing the design.</li>
-            <li>If we are missing SS photos, reach out to Tayler to see if we can avoid a Truck Roll.</li>
-            <li>Open Scanifly and match placement of panels with sold design. Download DWG.</li>
-            <li>Open AHJ database to ensure we are designing plans to all specific requirements.</li>
-            <li>Design in AutoCAD and Fill out Excel information with all customer information.</li>
-            <li>Send to Tayler for QA he will then request for Stamps if plans look accurate.</li>
-            <li>Automatic Upgrades:
-                <ul id="automatic-upgrades-list"></ul>
-            </li>
+            <!-- Your list items -->
         </ul>
     </div>
 </div>
@@ -276,47 +269,35 @@
                     subItemsContainer.appendChild(additionalTextElement);
                     subItemsContainer.appendChild(nestedContainer);
                 } else {
-                    const additionalTextElement = document.createElement('div');
-                    additionalTextElement.className = 'sub-item';
-                    additionalTextElement.innerHTML = `
+                    const textElement = document.createElement('div');
+                    textElement.className = 'sub-item';
+                    textElement.innerHTML = `
                         <label>
                             <input type="checkbox"> ${text}
                         </label>
                     `;
-                    subItemsContainer.appendChild(additionalTextElement);
+                    subItemsContainer.appendChild(textElement);
                 }
             });
 
             itemElement.appendChild(subItemsContainer);
-            fixedChecklist.appendChild(itemElement);
 
-            itemElement.addEventListener('click', (event) => {
-                if (!event.target.closest('.sub-item')) {
-                    const subItems = itemElement.querySelector('.sub-items');
-                    subItems.style.display = subItems.style.display === 'none' ? 'block' : 'none';
+            itemElement.addEventListener('click', function(event) {
+                if (event.target === itemElement) {
+                    const currentlyVisible = subItemsContainer.style.display === 'block';
+                    document.querySelectorAll('.sub-items').forEach(container => container.style.display = 'none');
+                    subItemsContainer.style.display = currentlyVisible ? 'none' : 'block';
                 }
             });
-        });
-    }
 
-    function updatePreferences() {
-        const upgradesList = document.getElementById('automatic-upgrades-list');
-        const upgrades = ['Federal Pacific', 'Zinsco', 'Pushmatic', 'Pancake Meter'];
-
-        upgradesList.innerHTML = '';
-        upgrades.forEach(upgrade => {
-            const listItem = document.createElement('li');
-            listItem.textContent = upgrade;
-            upgradesList.appendChild(listItem);
+            fixedChecklist.appendChild(itemElement);
         });
     }
 
     updateChecklist();
-    updatePreferences();
 
     document.getElementById('toggle-theme').addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        document.body.classList.toggle('light-mode');
     });
 </script>
 
