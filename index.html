@@ -80,7 +80,6 @@
             margin-top: 5px;
             padding-left: 20px;
         }
-
         .light-mode {
             background-color: #ffffff;
             color: #000000;
@@ -88,7 +87,6 @@
         .light-mode .checklist, .light-mode .fixed-checklist, .light-mode .preferences {
             border-color: #000000;
         }
-
         .dark-mode {
             background-color: #1e1e1e;
             color: #e0e0e0;
@@ -105,7 +103,6 @@
         .dark-mode .sub-item input[type="checkbox"]:checked::before {
             background-color: #e0e0e0;
         }
-
         .logo-container {
             display: flex;
             align-items: center;
@@ -123,12 +120,52 @@
             height: 30px;
             margin-right: 10px;
         }
+        .dropdown-container {
+            margin-bottom: 20px;
+        }
+        .dropdown-container select {
+            padding: 5px;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .theme-toggle {
+            margin-bottom: 20px;
+        }
+        .theme-toggle button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+        }
+        .theme-toggle button.light-mode-btn {
+            background-color: #fff;
+            color: #000;
+            border: 1px solid #000;
+        }
     </style>
 </head>
 <body class="light-mode">
 
-<div>
-    <button id="toggle-theme">Toggle Dark Mode</button>
+<div class="theme-toggle">
+    <button id="toggle-theme" class="light-mode-btn">Toggle Dark Mode</button>
+</div>
+
+<div class="dropdown-container">
+    <select id="state-dropdown">
+        <option value="">Select State</option>
+        <option value="California">California</option>
+        <option value="Texas">Texas</option>
+        <option value="Illinois">Illinois</option>
+    </select>
+    <select id="ahj-dropdown">
+        <option value="">Select AHJ</option>
+    </select>
+    <select id="utility-dropdown">
+        <option value="">Select Utility</option>
+    </select>
 </div>
 
 <div class="fixed-checklist">
@@ -202,34 +239,21 @@
                             "All wire sizes populated correctly",
                             "Correct Ambient Temp shown",
                             "Correct module and inverter shown",
-                            
                         ],
         "LABELS ▽": ["Select correct code years", 
-                            
                         ],
         "PLACARD ▽": ["Verify correct leaders shown", 
-                            
                         ],
-        "PHOTOS ▽": ["Correct photos shown",
-                            "Electrical Photos",
-                            "Structural Photos",
-                        ],
-                 "Electrical Photos": ["Close-up meter number",
-                                  "Meter location",
-                                  "Main Service Panel (Deadfront on/off)",
-                                  "Close-up Main breaker",
-                                  "Main Panel Labels"
-                        ],
-                 "Structural Photos": ["Attic Photos",
-                                  "Rafter size with dimension",
-                                  "Rafter spacing with dimension",
-                        ],
-        "SPEC SHEETS AND ADDITIONAL DOCUMENTS ▽": ["Module Specsheets", 
-                      "Inverter Specsheets", 
-                      "Railing Specsheets", 
-                      "Attachment Specsheets", 
-                            
-                        ],
+        "PHOTOS ▽": ["Verify photos match final set of plans", 
+                      "Verify all panels visible in photo",
+                      "Verify that the module and inverter labels are visible",
+                      "Verify service panel and meter",
+                      "Verify disconnections, grounding, and meter",
+                      "Verify panel with labels",
+                      "Service disconnect",
+                      "Grounding",
+                    ],
+        "SPEC SHEETS AND ADDITIONAL DOCUMENTS ▽": ["Review final documents"]
     };
 
     function updateChecklist() {
@@ -311,12 +335,77 @@
         });
     }
 
+    function updateAHJOptions() {
+        const stateDropdown = document.getElementById('state-dropdown');
+        const ahjDropdown = document.getElementById('ahj-dropdown');
+        
+        const ahjOptions = {
+            'California': ['Los Angeles City',
+                            'Los Angeles County',
+                            'Bakersfield',
+            ],
+            'Texas': ['Houston'],
+            'Illinois': ['Galesburg']
+        };
+        
+        stateDropdown.addEventListener('change', () => {
+            const selectedState = stateDropdown.value;
+            const options = ahjOptions[selectedState] || [];
+            
+            ahjDropdown.innerHTML = '<option value="">Select AHJ</option>';
+            options.forEach(option => {
+                const optionElement = document.createElement('option');
+                optionElement.value = option;
+                optionElement.textContent = option;
+                ahjDropdown.appendChild(optionElement);
+            });
+
+            updateUtilityOptions(selectedState);  // Update Utility options based on selected state
+        });
+    }
+
+    function updateUtilityOptions(state) {
+        const utilityDropdown = document.getElementById('utility-dropdown');
+        
+        const utilityOptions = {
+            'California': ['SCE',
+                            'PG&E',
+                            'SDG&E',
+
+            ],
+            'Texas': ['Oncor',
+                        
+
+            ],
+            'Illinois': ['Amerin']
+        };
+        
+        const options = utilityOptions[state] || [];
+        
+        utilityDropdown.innerHTML = '<option value="">Select Utility</option>';
+        options.forEach(option => {
+            const optionElement = document.createElement('option');
+            optionElement.value = option;
+            optionElement.textContent = option;
+            utilityDropdown.appendChild(optionElement);
+        });
+    }
+
     updateChecklist();
     updatePreferences();
+    updateAHJOptions();
 
     document.getElementById('toggle-theme').addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
         document.body.classList.toggle('light-mode');
+        const button = document.getElementById('toggle-theme');
+        if (document.body.classList.contains('dark-mode')) {
+            button.textContent = 'Switch to Light Mode';
+            button.classList.remove('light-mode-btn');
+        } else {
+            button.textContent = 'Switch to Dark Mode';
+            button.classList.add('light-mode-btn');
+        }
     });
 </script>
 
