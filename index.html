@@ -15,7 +15,7 @@
 }
 
 .checklist, .fixed-checklist, .preferences-box {
-    background-color: #ffffe0;
+    background-color: #a7abab;
     border-top: 2px solid #000;
     padding: 20px; /* Add padding to ensure content does not touch borders */
     margin-top: 20px;
@@ -38,7 +38,7 @@
 .sub-item {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .sub-item input[type="checkbox"] {
@@ -178,6 +178,9 @@
     color: green;
     font-weight: bold;
 }
+.indent {
+    margin-left: 20px;
+}
 
 
     </style>
@@ -238,71 +241,93 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
         const itemTexts = {
-            "COVER SHEET ▽": ["Correct Homeowner Name",
-                            "Correct Utility",
-                            "Correct AHJ",
-                            "Correct Homeowner Address",
-                            "Correct Codes and Standards",
-                            "Correct Electrical Equipment",
-                            "Correct Racking Information",
+            "PV01 COVER SHEET ▽": ["<label><input type='checkbox'> Correct Homeowner Name </label>",
+                            "<label><input type='checkbox'> Correct Utility </label>",
+                            "<label><input type='checkbox'> Correct AHJ </label>",
+                            "<label><input type='checkbox'> Correct Homeowner Address </label>",
+                            "<label><input type='checkbox'> Always show Parcel number (APN) </label>",
+                            "<label><input type='checkbox'> Correct Codes and Standards </label>",
+                            "<label><input type='checkbox'> Correct Electrical Equipment </label>",
+                            "<label><input type='checkbox'> Correct Racking Information </label>",
                         ],
-            "SITE PLAN ▽": ["Prioritize Portrait Orientation",
-                          "PV Array matches DXF file",
-                          "Driveway and Fence Shown (If Applicable)",
-                          "Correct Fire Setbacks Shown",
-                          "Frontage Road Shown",
-                          "Property Line Dimensioned",
-                          "Legend Accurate",
-                          "Junction Box Shown",
-                          "Mounting Plane Shown",
-                          "Correct Array Details",
-                          "Correct Equipment Location",
+            "PV02 SITE PLAN ▽": ["<label><input type='checkbox'> Prioritize Portrait Orientation </label>",
+                          "<label><input type='checkbox'> PV Array matches DXF file </label>",
+                          "<label><input type='checkbox'> These are properly shown in the SITE PLAN: </label>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Driveway and Fence (If Applicable) </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Correct Fire Setbacks </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Frontage Road  </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Property Line Dimensioned </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Junction Box </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Mounting Plane </label></div>",
+                          "<div class='sub-item indent'><label><input type='checkbox'> Correct Equipment Location </label>",
+                          "<label><input type='checkbox'> Legend Accurate </label>",
+                          "<label><input type='checkbox'> Correct Array Details </label>",
+
                           ],
-            "ROOF PLAN ▽": ["Verify Equipment Information", 
-                          "Accurate Equipment Quantities",
-                          "Correct Roof Info",
-                          "Attachment Legend Shown",
-                          "Setbacks and Attachment spacing Dimensioned",
+            "PV03 ROOF PLAN ▽": ["<label><input type='checkbox'> Verify Equipment Information </label>", 
+                          "<label><input type='checkbox'> Accurate Equipment Quantities </label>",
+                          "<label><input type='checkbox'> Correct Roof Info </label>",
+                          "<label><input type='checkbox'> Attachment Legend Shown </label>",
+                          "<label><input type='checkbox'> Setbacks and Attachment spacing Dimensioned </label>",
                         ],
-            "MOUNTING DETAIL ▽": ["Verify the correct DWG matches the called out attachment"],
-            "LINE DIAGRAM ▽": ["Correct dropdown for stringing selected",
-                                "Correct number of modules per string",
-                                "Tag number corresponds with the correct tags in Conductor details",
-                                "Accurate number of wires in the line diagram and conductor details",
-                                "All new equipment shown in Equipment Schedule",
-                                "Correct Main Panel type and ratings",
-                                "Correct AC disconnect type and rating used",
-                                "Correct meter number",
-                                "Correct OCPD size",
+            "PV04 MOUNTING DETAIL ▽": ["<label><input type='checkbox'> Verify the correct DWG matches the called out attachment </label>"],
+            "PV05 LINE DIAGRAM ▽": ["<label><input type='checkbox'> Correct dropdown for stringing selected </label>",
+                                "<label><input type='checkbox'> Correct number of modules per string </label>",
+                                "<label><input type='checkbox'> Tag number corresponds with the correct tags in Conductor details </label>",
+                                "<label><input type='checkbox'> Accurate number of wires in the line diagram and conductor details </label>",
+                                "<label><input type='checkbox'> All new equipment shown in Equipment Schedule </label>",
+                                "<label><input type='checkbox'> Correct Main Panel type and ratings </label>",
+                                "<label><input type='checkbox'> Correct AC disconnect type and rating used </label>",
+                                "<label><input type='checkbox'> Verify meter information </label>",
+                                        "<div class='sub-item indent'><label><input type='checkbox'> Meter number </label>",
+                                         "<div class='sub-item indent'><label><input type='checkbox'> Utility name </label>",         
+                                            
+                                "<label><input type='checkbox'> Correct OCPD size </label>",
                             ],
-            "ELECTRICAL CALCULATIONS ▽": ["Verify all calculations populated correctly", 
-                                "All wire sizes populated correctly",
-                                "Correct Ambient Temp shown",
-                                "Correct module and inverter shown",
+            "PV06 ELECTRICAL CALCULATIONS ▽": ["<label><input type='checkbox'> Verify all calculations populated correctly </label>", 
+                                "<label><input type='checkbox'> All wire sizes populated correctly </label>",
+                                "<label><input type='checkbox'> Correct Ambient Temp shown </label>",
+                                "<label><input type='checkbox'> Correct module and inverter shown </label>",
                             ],
-            "LABELS ▽": ["Select the correct AHJ Labels",
-                            "Verify the labels match what is shown on the plans"
+            "PV07 LABELS ▽": ["<label><input type='checkbox'> Select the correct AHJ Labels </label>",
+                            "<label><input type='checkbox'> Verify the labels match what is shown on the plans </label>"
                         ],
-            "PLACARD ▽": ["Check for correct placard details",
-                            "Ensure placard matches the approved AHJ placard"],
-            "PHOTOS ▽": ["Ensure all photos show up clearly in the PDF",
-                            "Ensure photos are labeled correctly"],
-            "SPEC SHEETS AND ADDITIONAL DOCUMENTS ▽": ["Verify all required spec sheets are included in the checklist",
-                                                        "Ensure all additional documents are included"
-                                                        ]
+            "PV08 PLACARD ▽": ["<label><input type='checkbox'> Check for correct placard details </label>",
+                            
+                        ],
+            "PV09 PHOTOS ▽": ["<label><input type='checkbox'> Ensure all photos show up clearly in the PDF </label>",
+                          "<label><input type='checkbox'> Electrical Photos: </label>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Close-up meter</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Meter location</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> MSP with Deadfront on/off </label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Main breaker</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Main Panel Label</label></div>",
+                         "<label><input type='checkbox'>Structural Photos: </label>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Attic Photos</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Dimensioned Rafter size</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Dimensioned Rafter spacing </label></div>",
+                                 
+                                ],
+            "SPEC SHEETS AND ADDITIONAL DOCUMENTS ▽": ["<label><input type='checkbox'> Verify all required spec sheets are included in the checklist </label>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Module specsheet</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Inverter specsheet </label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Railing specsheet</label></div>",
+                                 "<div class='sub-item indent'><label><input type='checkbox'> Attachment specsheet</label></div>",
+                                                
+                                  ]
         };
         
         function updateChecklist() {
             const fixedChecklist = document.getElementById('fixed-checklist-list');
-            const fixedItems = ['COVER SHEET ▽',
-                                'SITE PLAN ▽', 
-                                'ROOF PLAN ▽', 
-                                'MOUNTING DETAIL ▽',
-                                'LINE DIAGRAM ▽',
-                                'ELECTRICAL CALCULATIONS ▽',
-                                'LABELS ▽',
-                                'PLACARD ▽',
-                                'PHOTOS ▽',
+            const fixedItems = ['PV01 COVER SHEET ▽',
+                                'PV02 SITE PLAN ▽', 
+                                'PV03 ROOF PLAN ▽', 
+                                'PV04 MOUNTING DETAIL ▽',
+                                'PV05 LINE DIAGRAM ▽',
+                                'PV06 ELECTRICAL CALCULATIONS ▽',
+                                'PV07 LABELS ▽',
+                                'PV08 PLACARD ▽',
+                                'PV09 PHOTOS ▽',
                                 'SPEC SHEETS AND ADDITIONAL DOCUMENTS ▽',
                                ];
 
@@ -325,7 +350,7 @@
                             nestedTextElement.className = 'sub-item';
                             nestedTextElement.innerHTML = `
                                 <label>
-                                    <input type="checkbox"> ${nestedText}
+                                     ${nestedText}
                                 </label>
                             `;
                             nestedContainer.appendChild(nestedTextElement);
@@ -340,7 +365,7 @@
                         additionalTextElement.className = 'sub-item';
                         additionalTextElement.innerHTML = `
                             <label>
-                                <input type="checkbox"> ${text}
+                                 ${text}
                             </label>
                         `;
                         subItemsContainer.appendChild(additionalTextElement);
@@ -527,7 +552,67 @@ function handleGroundMountCheckbox() {
         }
     });
 }
+function handleDerateCheckbox() {
+    const derateCheckbox = document.getElementById('de-rate');
+    const lineDiagramItem = Array.from(document.querySelectorAll('li.checklist-item')).find(item => item.textContent.includes("LINE DIAGRAM ▽"));
+    const labelsItem = Array.from(document.querySelectorAll('li.checklist-item')).find(item => item.textContent.includes("LABELS ▽"));
 
+    if (!derateCheckbox || !lineDiagramItem || !labelsItem) return;
+
+    derateCheckbox.addEventListener('change', () => {
+        const lineDiagramSubItemsContainer = lineDiagramItem.querySelector('.sub-items');
+        const labelsSubItemsContainer = labelsItem.querySelector('.sub-items');
+
+        if (derateCheckbox.checked) {
+            // Add additional requirements to the Line Diagram
+            const lineDiagramNewItems = [
+                'Main breaker must be de-rated and tagged as (N)'
+            ];
+
+            lineDiagramNewItems.forEach(text => {
+                const newItem = document.createElement('div');
+                newItem.className = 'sub-item green-highlight';
+                newItem.innerHTML = `<label><input type="checkbox"> ${text}</label>`;
+                lineDiagramSubItemsContainer.appendChild(newItem);
+            });
+
+            // Add label for De-rate to the Labels section
+            const labelNewItems = [
+                'Label for De-rate added to the page'
+            ];
+
+            labelNewItems.forEach(text => {
+                const newItem = document.createElement('div');
+                newItem.className = 'sub-item green-highlight';
+                newItem.innerHTML = `<label><input type="checkbox"> ${text}</label>`;
+                labelsSubItemsContainer.appendChild(newItem);
+            });
+        } else {
+            // Remove the de-rate related items when checkbox is unchecked
+            const lineDiagramItemsToRemove = [
+                'Main breaker must be de-rated and tagged as (N)'
+            ];
+
+            lineDiagramItemsToRemove.forEach(text => {
+                const itemToRemove = Array.from(lineDiagramSubItemsContainer.querySelectorAll('.sub-item')).find(subItem => subItem.textContent.includes(text));
+                if (itemToRemove) {
+                    lineDiagramSubItemsContainer.removeChild(itemToRemove);
+                }
+            });
+
+            const labelItemsToRemove = [
+                'Label for De-rate added to the page'
+            ];
+
+            labelItemsToRemove.forEach(text => {
+                const itemToRemove = Array.from(labelsSubItemsContainer.querySelectorAll('.sub-item')).find(subItem => subItem.textContent.includes(text));
+                if (itemToRemove) {
+                    labelsSubItemsContainer.removeChild(itemToRemove);
+                }
+            });
+        }
+    });
+}
 
 
 
@@ -535,7 +620,8 @@ function handleGroundMountCheckbox() {
         updatePreferences();
         updateAHJOptions();
         handleTrenchingCheckbox();
-        handleGroundMountCheckbox(); 
+        handleGroundMountCheckbox();
+        handleDerateCheckbox(); // Initialize the event listener for De-rate checkbox 
 
         document.getElementById('toggle-theme').addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
