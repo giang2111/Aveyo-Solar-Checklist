@@ -8,161 +8,177 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600&display=swap">
     <style>
         body {
-            font-family: 'Lexend', Arial, sans-serif;
-            margin: 20px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-        .checklist, .fixed-checklist {
-            background-color: #ffffe0;
-            border-top: 2px solid #000;
-            padding-top: 10px;
-            margin-top: 20px;
-        }
-        .checklist-item {
-            margin-bottom: 10px;
-            list-style-type: none;
-            padding-left: 0;
-            cursor: pointer;
-        }
-        .sub-items {
-            padding-left: 20px;
-            margin-top: 5px;
-            display: none;
-        }
-        .sub-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .sub-item input[type="checkbox"] {
-            margin-right: 10px;
-            appearance: none;
-            width: 12px;
-            height: 12px;
-            border: 2px solid #000;
-            border-radius: 50%;
-            position: relative;
-            vertical-align: middle;
-        }
-        .sub-item input[type="checkbox"]:checked::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background-color: #000;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .preferences-box {
-            background-color: #ffffe0;
-            padding: 20px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border-top: 2px solid #000;
-        }
-        .preferences {
-            border-top: 2px solid #000;
-            padding-top: 10px;
-            margin-top: 20px;
-        }
-        .preferences ul {
-            padding-left: 20px;
-            margin: 0;
-        }
-        .preferences li {
-            line-height: 2em;
-            margin-bottom: 5px;
-            list-style-type: disc;
-        }
-        .preferences li ul {
-            margin-top: 5px;
-            padding-left: 20px;
-        }
-        .light-mode {
-            background-color: #ffffff;
-            color: #000000;
-        }
-        .light-mode .checklist, .light-mode .fixed-checklist, .light-mode .preferences {
-            border-color: #000000;
-        }
-        .dark-mode {
-            background-color: #1e1e1e;
-            color: #e0e0e0;
-        }
-        .dark-mode .checklist, .dark-mode .fixed-checklist, .dark-mode .preferences {
-            border-color: #e0e0e0;
-        }
-        .dark-mode .checklist, .dark-mode .fixed-checklist, .dark-mode .preferences-box {
-            background-color: transparent;
-        }
-        .dark-mode .sub-item input[type="checkbox"] {
-            border-color: #e0e0e0;
-        }
-        .dark-mode .sub-item input[type="checkbox"]:checked::before {
-            background-color: #e0e0e0;
-        }
-        .logo-container {
-            display: flex;
-            align-items: center;
-        }
-        .logo-container img {
-            height: 40px;
-            margin-right: 10px;
-        }
-        .preferences-logo {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .preferences-logo img {
-            height: 30px;
-            margin-right: 10px;
-        }
-        .dropdown-container {
-            margin-bottom: 20px;
-        }
-        .dropdown-container select {
-            padding: 5px;
-            font-size: 16px;
-            margin-right: 10px;
-        }
-        .theme-toggle {
-            margin-bottom: 20px;
-        }
-        .theme-toggle button {
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            border: none;
-            background-color: #000;
-            color: #fff;
-            border-radius: 5px;
-        }
-        .theme-toggle button.light-mode-btn {
-            background-color: #fff;
-            color: #000;
-            border: 1px solid #000;
-        }
-        .checkbox-list-container {
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
-        .checkbox-list-container label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 16px;
-        }
-        .checkbox-list-container input[type="checkbox"] {
-            margin: 0;
-        }
-        .green-highlight {
+    font-family: 'Lexend', Arial, sans-serif;
+    margin: 20px;
+    transition: background-color 0.3s, color 0.3s;
+    position: relative; /* Ensure the dark mode button is positioned correctly */
+}
+
+.checklist, .fixed-checklist, .preferences-box {
+    background-color: #ffffe0;
+    border-top: 2px solid #000;
+    padding: 20px; /* Add padding to ensure content does not touch borders */
+    margin-top: 20px;
+    border-radius: 5px; /* Optional: Add rounded corners */
+}
+
+.checklist-item {
+    margin-bottom: 10px;
+    list-style-type: none;
+    padding-left: 0;
+    cursor: pointer;
+}
+
+.sub-items {
+    padding-left: 20px;
+    margin-top: 5px;
+    display: none;
+}
+
+.sub-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.sub-item input[type="checkbox"] {
+    margin-right: 10px;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border: 2px solid #000;
+    border-radius: 50%;
+    position: relative;
+    vertical-align: middle;
+}
+
+.sub-item input[type="checkbox"]:checked::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 6px;
+    height: 6px;
+    background-color: #000;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.preferences-box {
+    padding: 20px; /* Ensure padding is added */
+    border-radius: 5px; /* Optional: Add rounded corners */
+    border-top: 2px solid #000;
+}
+.preferences ul li {
+        line-height: 2; /* Increase the line-height for better text spacing */
+    }
+
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.light-mode .checklist, .light-mode .fixed-checklist, .light-mode .preferences {
+    border-color: #000000;
+}
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+}
+
+.dark-mode .checklist, .dark-mode .fixed-checklist, .dark-mode .preferences {
+    border-color: #e0e0e0;
+}
+
+.dark-mode .checklist, .dark-mode .fixed-checklist, .dark-mode .preferences-box {
+    background-color: transparent;
+}
+
+.dark-mode .sub-item input[type="checkbox"] {
+    border-color: #e0e0e0;
+}
+
+.dark-mode .sub-item input[type="checkbox"]:checked::before {
+    background-color: #e0e0e0;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-container img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.preferences-logo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.preferences-logo img {
+    height: 30px;
+    margin-right: 10px;
+}
+
+.dropdown-container {
+    margin-bottom: 20px;
+}
+
+.dropdown-container select {
+    padding: 5px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.theme-toggle {
+    position: fixed; /* Changed from absolute to fixed */
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.theme-toggle button {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.theme-toggle button.light-mode-btn {
+    background-color: #fff;
+    color: #000;
+    border: 1px solid #000;
+}
+
+.checkbox-list-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.checkbox-list-container label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 16px;
+}
+
+.checkbox-list-container input[type="checkbox"] {
+    margin: 0;
+}
+
+.green-highlight {
     color: green;
     font-weight: bold;
 }
+
 
     </style>
 </head>
